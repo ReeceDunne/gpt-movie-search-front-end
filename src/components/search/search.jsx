@@ -2,24 +2,42 @@
 import React, { useState } from "react";
 import { IoIosSearch } from "react-icons/io";
 
-const Search = () => {
-    const [value, setValue] = useState("Search movies by prompt...")
+export const SearchProps = {
+    onSearch: (value) => {}
+  };
+
+const Search = (SearchProps) => {
+    const {onSearch} = SearchProps;
+    const placeholderValue = "Search movies by prompt..."
+    const [value, setValue] = useState(placeholderValue)
 
     const searchHandler = (event) => {
-        const {target} = event
+        const {target} = event;
         setValue(target.value)
-        console.log(value)
     }
+
+    const handleKeyDown = (event) => {
+        if (event.key === "Enter") {
+            onSearch(value)
+        }
+    }
+
+    const handleClick = () => {
+        onSearch(value);
+      };
 
     return (
         <div className="relative w-full text-gray-600">
-            <input type="search" 
+            <input 
+            type="search" 
             name="search" 
-            placeholder={value} 
+            placeholder={placeholderValue} 
             className="bg-white h-10 px-5 pr-10 w-full rounded-full text-sm focus:outline-none" 
-            onChange={searchHandler}/>
+            onChange={searchHandler}
+            onKeyDown={handleKeyDown}
+            />
             <button type="submit" className="absolute right-0 top-- mt-3 mr-4 text-xl">
-                <IoIosSearch/>
+                <IoIosSearch onClick={handleClick}/>
             </button>
         </div>
     )
