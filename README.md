@@ -27,7 +27,7 @@ _First following the setup steps of the Express.js application_
 
 ```bash
 git clone https://github.com/ReeceDunne/gpt-movie-search.git
-cd movie-details-search
+cd gpt-movie-search-front-end
 ```
 
 ### 2. Install dependencies
