@@ -3,33 +3,59 @@ import Search from "@/components/search/search";
 import { useState } from "react";
 
 export default function Home() {
-  const [searchValue, setSearchValue] = useState("");
   const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [hasSearched, setHasSearched] = useState(false);
 
-  const getMovies = async () => {
+  const searchMessages = [
+    "Digging through the archives for something awesome... 🎞️",
+    "Exploring the world of movies... 🌍",
+    "Uncovering hidden cinematic gems... 💎",
+    "On a movie hunt, hold tight... 🏹",
+    "Grab some popcorn while we search... 🍿",
+    "Tracking down movie masterpieces... 🕵️",
+    "On a quest for the next great movie... 🧑‍🚀",
+  ];
+
+  const randomMessage =
+    searchMessages[Math.floor(Math.random() * searchMessages.length)];
+
+  const getMovies = async (searchTerm) => {
+    setLoading(true);
+    setHasSearched(true); // Mark that a search has been performed
+
     try {
       let response = await fetch(
-        `http://localhost:8080/movies/discover?amount=5&prompt=${searchValue}`
+        `http://localhost:8080/movies/discover?amount=5&prompt=${searchTerm}`
       );
 
       const data = await response.json();
-      setResults(data.movies);
+      setResults(data.movies && data.movies.length > 0 ? data.movies : []);
     } catch (error) {
-      console.error(error);
       setResults([]);
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleSearch = async (value) => {
-    setSearchValue(value);
-    await getMovies();
+    await getMovies(value);
   };
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 w-full max-w-md items-center justify-between font-mono text-sm flex-inline">
         <Search onSearch={handleSearch} />
-        {searchValue && results && (
+
+        {/* Show loading state */}
+        {loading && (
+          <div className="flex justify-center items-center gap-2 mt-4">
+            <div className="w-6 h-6 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+            <p className="text-blue-500 font-medium">{randomMessage}</p>
+          </div>
+        )}
+
+        {!loading && hasSearched && results && (
           <>
             <ul className="mt-4">
               {results.length > 0 ? (
@@ -67,7 +93,9 @@ export default function Home() {
                   </li>
                 ))
               ) : (
-                <p>No results found</p>
+                <p className="text-gray-400 text-center mt-4">
+                  No results found
+                </p>
               )}
             </ul>
           </>
