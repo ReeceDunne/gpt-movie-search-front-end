@@ -11,8 +11,7 @@ https://github.com/ReeceDunne/movie-ratings
 ## Features:
 
 - Prompt-based movie search using OpenAI's GPT model.
-- Fetch movie details from OMDB API (including title, release date, director, genre, etc.).
-- Calculate the average rating of movies based on IMDb and Rotten Tomatoes scores (only if both ratings are valid).
+- Fetch movie details from OMDB API (including title, release date, runtime, 3rd party ratings, etc.).
 
 ## Requirements:
 
@@ -53,4 +52,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ### 5. Interact with the Search Bar:
 
-Once the page has loaded enter a prompt into the Searchbar and a list of movies will be returned
+Once the page has loaded and you have successfully logged in enter a prompt into the Searchbar and a list of movies will be returned
