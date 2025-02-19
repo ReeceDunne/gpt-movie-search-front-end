@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { IoIosSearch } from "react-icons/io";
 
 const Search = (SearchProps) => {
-    // Add so that search has to have a value
     const {onSearch} = SearchProps;
     const placeholderValue = "Search movies by prompt..."
     const [value, setValue] = useState(placeholderValue);

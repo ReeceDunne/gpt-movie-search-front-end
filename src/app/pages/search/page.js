@@ -19,14 +19,13 @@ export default function Search() {
     searchMessages[Math.floor(Math.random() * searchMessages.length)];
   const getMovies = async (searchTerm) => {
     setLoading(true);
-    setHasSearched(true); // Mark that a search has been performed
+    setHasSearched(true);
 
     try {
       let response = await fetch(
         `http://localhost:8080/movies/discover?amount=5&prompt=${searchTerm}`
       );
       const data = await response.json();
-      console.log(data);
       setResults(data.movies && data.movies.length > 0 ? data.movies : []);
     } catch (error) {
       setResults([]);
