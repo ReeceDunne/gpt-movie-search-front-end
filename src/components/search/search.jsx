@@ -2,14 +2,11 @@
 import React, { useState } from "react";
 import { IoIosSearch } from "react-icons/io";
 
-export const SearchProps = {
-    onSearch: (value) => {}
-  };
-
 const Search = (SearchProps) => {
+    // Add so that search has to have a value
     const {onSearch} = SearchProps;
     const placeholderValue = "Search movies by prompt..."
-    const [value, setValue] = useState(placeholderValue)
+    const [value, setValue] = useState(placeholderValue);
 
     const searchHandler = (event) => {
         const {target} = event;
@@ -17,13 +14,15 @@ const Search = (SearchProps) => {
     }
 
     const handleKeyDown = (event) => {
-        if (event.key === "Enter") {
+        if (event.key === "Enter" && value !== "Search movies by prompt...") {
             onSearch(value)
         }
     }
 
     const handleClick = () => {
+        if (value !== "Search movies by prompt...") {
         onSearch(value);
+        }
       };
 
     return (
