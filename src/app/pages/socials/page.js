@@ -1,8 +1,11 @@
 export default function Socials() {
+  const GITHUB_USER = process.env.NEXT_PUBLIC_GITHUB_USER;
+  const LINKEDIN_USER = process.env.NEXT_PUBLIC_LINKEDIN_USER;
+
   return (
     <div className="flex justify-center items-center space-x-6 pb-6">
       <a
-        href="https://github.com/ReeceDunne"
+        href={`https://github.com/${GITHUB_USER}`}
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -14,7 +17,7 @@ export default function Socials() {
       </a>
 
       <a
-        href="https://www.linkedin.com/in/reece-dunne"
+        href={`https://www.linkedin.com/in/${LINKEDIN_USER}`}
         target="_blank"
         rel="noopener noreferrer"
       >
