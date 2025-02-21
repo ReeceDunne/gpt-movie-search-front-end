@@ -31,7 +31,7 @@ const RecentSearch = ({ searchHistory, setValue }) => {
       <button
         ref={buttonRef}
         onClick={toggleMenu} // Toggle menu visibility
-        className="bg-blue-500 text-white px-4 py-2 rounded-lg font-semibold z-10"
+        className="bg-blue-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors z-10"
       >
         {showMenu ? "Hide Recent Searches" : "Show Recent Searches"}
       </button>
