@@ -3,6 +3,7 @@ import Searchbar from "@/components/search/search";
 import { useState } from "react";
 
 export default function Search() {
+  const MOVIE_SEARCH_API = process.env.NEXT_PUBLIC_MOVIE_SEARCH_API;
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
@@ -23,7 +24,7 @@ export default function Search() {
 
     try {
       let response = await fetch(
-        `http://localhost:8080/movies/discover?amount=5&prompt=${searchTerm}`
+        `${MOVIE_SEARCH_API}?amount=5&prompt=${searchTerm}`
       );
       const data = await response.json();
       setResults(data.movies && data.movies.length > 0 ? data.movies : []);
@@ -40,7 +41,7 @@ export default function Search() {
   return (
     <main className="flex-grow flex flex-col items-center justify-start p-24">
       <div className="z-10 w-full max-w-md items-center justify-between font-mono text-sm flex-inline">
-        <Searchbar onSearch={handleSearch} />
+        <Searchbar onSearch={handleSearch} loading={loading} />
         {/* Show loading state */}
         {loading && (
           <div className="flex justify-center items-center gap-2 mt-4">
