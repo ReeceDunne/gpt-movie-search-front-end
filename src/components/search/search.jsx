@@ -5,22 +5,22 @@ import { IoIosSearch } from "react-icons/io";
 const Search = (SearchProps) => {
     const {onSearch} = SearchProps;
     const placeholderValue = "Search movies by prompt..."
-    const [value, setValue] = useState(placeholderValue);
+    const [value, setValue] = useState("");
 
     const searchHandler = (event) => {
-        const {target} = event;
-        setValue(target.value)
+        setValue(event.target.value)
     }
 
-    const handleKeyDown = (event) => {
-        if (event.key === "Enter" && value !== "Search movies by prompt...") {
-            onSearch(value)
+    const handleSearch = () => {
+        if (value.trim() && value !== placeholderValue) {
+            onSearch(value);
+            setValue("");
         }
     }
 
-    const handleClick = () => {
-        if (value !== "Search movies by prompt...") {
-        onSearch(value);
+    const handleKeyDown = (event) => {
+        if (event.key === "Enter") {
+            handleSearch(value);
         }
       };
 
@@ -30,12 +30,13 @@ const Search = (SearchProps) => {
             type="search" 
             name="search" 
             placeholder={placeholderValue} 
+            value={value}
             className="bg-white h-10 px-5 pr-10 w-full rounded-full text-sm focus:outline-none" 
             onChange={searchHandler}
             onKeyDown={handleKeyDown}
             />
             <button type="submit" className="absolute right-0 top-- mt-3 mr-4 text-xl">
-                <IoIosSearch onClick={handleClick}/>
+                <IoIosSearch onClick={handleSearch}/>
             </button>
         </div>
     )
