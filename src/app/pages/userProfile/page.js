@@ -17,7 +17,7 @@ export default function userProfile({ user }) {
       {/* Logout Button */}
       <a
         href="/api/auth/logout?federated=true"
-        className="mt-3 w-full text-center px-4 py-2 bg-blue-500 text-white font-medium text-sm rounded-lg shadow-md hover:bg-blue-700 transition-colors"
+        className="mt-3 w-full text-center px-4 py-2 bg-blue-500 text-white font-semibold text-sm rounded-lg shadow-md hover:bg-blue-700 transition-colors"
       >
         Logout
       </a>
