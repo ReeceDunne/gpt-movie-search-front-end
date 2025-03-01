@@ -19,7 +19,7 @@ export default function ProfileClient() {
           <UserProfile user={user} />
           <Search />
           {/* Footer with Socials */}
-          <footer className="mt-auto flex justify-center items-center p-6">
+          <footer className="mt-auto flex justify-center items-center">
             <Socials />
           </footer>
         </div>

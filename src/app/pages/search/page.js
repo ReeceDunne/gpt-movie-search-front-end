@@ -39,7 +39,7 @@ export default function Search() {
   };
 
   return (
-    <main className="flex-grow flex flex-col items-center justify-start p-24">
+    <main className="flex-grow flex flex-col items-center justify-start p-24 pb-10">
       <div className="z-10 w-full max-w-md items-center justify-between font-mono text-sm flex-inline">
         <Searchbar onSearch={handleSearch} loading={loading} />
         {/* Show loading state */}
