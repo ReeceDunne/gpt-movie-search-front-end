@@ -10,11 +10,11 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
-  bgcolor: "#ffffff", // White background
-  border: "1px solid #eaeaea", // Light border similar to Auth0 styling
+  bgcolor: "#ffffff",
+  border: "1px solid #eaeaea",
   boxShadow: 24,
   p: 4,
-  borderRadius: "8px", // Rounded corners
+  borderRadius: "8px",
 };
 
 export default function userProfile({ user }) {
@@ -80,18 +80,18 @@ export default function userProfile({ user }) {
             sx={{
               mt: 3,
               border: "1px solid #8e8e8e",
-              color: "#1E212A", // Default color
-              width: "100%", // Make the button take full width
-              textAlign: "center", // Ensure the text inside the button is centered
-              textTransform: "none", // Disable auto capitalization
+              color: "#1E212A",
+              width: "100%",
+              textAlign: "center",
+              textTransform: "none",
               fontSize: "16px",
               "&:hover": {
-                backgroundColor: "#f0f0f0", // Darker gray on hover
-                borderColor: "#8e8e8e", // Lighter border on hover
+                backgroundColor: "#f0f0f0",
+                borderColor: "#8e8e8e",
               },
-              padding: "10px", // Adjust padding for better button size
+              padding: "10px",
             }}
-            href="/api/auth/logout?federated=true"
+            href="/api/auth/logout"
           >
             Confirm Logout
           </Button>
