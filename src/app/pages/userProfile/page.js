@@ -1,4 +1,27 @@
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "#ffffff",
+  border: "1px solid #eaeaea",
+  boxShadow: 24,
+  p: 4,
+  borderRadius: "8px",
+};
+
 export default function userProfile({ user }) {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
     <div className="absolute top-4 right-4 bg-gray-800 p-3 rounded-lg shadow-lg flex flex-col items-center w-44">
       {/* Profile Image */}
@@ -16,18 +39,64 @@ export default function userProfile({ user }) {
 
       {/* Logout Button */}
       <a
-        href="/api/auth/logout?federated=true"
+        onClick={handleOpen}
         className="mt-3 w-full text-center px-4 py-2 bg-blue-500 text-white font-semibold text-sm rounded-lg shadow-md hover:bg-blue-700 transition-colors"
       >
         Logout
       </a>
 
-      {/* <a
-        onClick={() => (window.location.href = "/api/auth/logout?federated")}
-        className="mt-3 w-full text-center px-4 py-2 bg-blue-500 text-white font-medium text-sm rounded-lg shadow-md hover:bg-blue-700 transition-colors cursor-pointer"
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
       >
-        Logout
-      </a> */}
+        <Box sx={style}>
+          <Typography
+            id="modal-modal-title"
+            variant="h6"
+            component="h2"
+            sx={{
+              color: "#1E212A",
+              fontSize: "24px",
+              fontWeight: "bold",
+              textAlign: "center",
+            }}
+          >
+            Goodbye
+          </Typography>
+          <Typography
+            id="modal-modal-description"
+            sx={{
+              mt: 2,
+              color: "#1E212A",
+              fontSize: "14px",
+              textAlign: "center",
+            }}
+          >
+            Thank you for using the Movie Search App
+          </Typography>
+          <Button
+            sx={{
+              mt: 3,
+              border: "1px solid #8e8e8e",
+              color: "#1E212A",
+              width: "100%",
+              textAlign: "center",
+              textTransform: "none",
+              fontSize: "16px",
+              "&:hover": {
+                backgroundColor: "#f0f0f0",
+                borderColor: "#8e8e8e",
+              },
+              padding: "10px",
+            }}
+            href="/api/auth/logout"
+          >
+            Confirm Logout
+          </Button>
+        </Box>
+      </Modal>
     </div>
   );
 }
