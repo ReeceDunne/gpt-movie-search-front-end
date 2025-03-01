@@ -19,7 +19,7 @@ export default function Login() {
         {/* Login Button */}
         <a
           href="/api/auth/login"
-          className="px-7 py-3 bg-blue-500 text-white text-2xl font-semibold rounded-2xl shadow-xl text-center hover:bg-blue-700 transition-colors cursor-pointer"
+          className="px-10 py-2 bg-blue-500 text-white text-xl font-semibold rounded-lg shadow-md text-center  hover:bg-blue-700 transition-colors cursor-pointer"
         >
           Login
         </a>
