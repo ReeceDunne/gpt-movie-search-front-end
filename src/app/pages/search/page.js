@@ -1,12 +1,14 @@
 "use client";
-import Searchbar from "@/components/search/search";
 import { useState } from "react";
+import SortSearch from "@/components/sortSearch/sortSearch";
+import Searchbar from "@/components/search/search";
 
 export default function Search() {
   const MOVIE_SEARCH_API = process.env.NEXT_PUBLIC_MOVIE_SEARCH_API;
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
+
   const searchMessages = [
     "Digging through the archives for something awesome... 🎞️",
     "Exploring the world of movies... 🌍",
@@ -18,6 +20,7 @@ export default function Search() {
   ];
   const randomMessage =
     searchMessages[Math.floor(Math.random() * searchMessages.length)];
+
   const getMovies = async (searchTerm) => {
     setLoading(true);
     setHasSearched(true);
@@ -27,6 +30,7 @@ export default function Search() {
         `${MOVIE_SEARCH_API}?amount=5&prompt=${searchTerm}`
       );
       const data = await response.json();
+      console.log(data.movies);
       setResults(data.movies && data.movies.length > 0 ? data.movies : []);
     } catch (error) {
       setResults([]);
@@ -48,6 +52,14 @@ export default function Search() {
             <div className="w-6 h-6 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
             <p className="text-blue-500 font-medium">{randomMessage}</p>
           </div>
+        )}
+        {results.length > 0 && (
+          <>
+            <h2 className="text-lg font-semibold mt-6 mb-2 text-center">
+              Sort By
+            </h2>
+            <SortSearch results={results} setResults={setResults} />
+          </>
         )}
         {!loading && hasSearched && results && (
           <>
@@ -83,8 +95,12 @@ export default function Search() {
                         Release Date: {movie.releaseDate}
                       </p>
                       <p className="text-sm text-gray-200 mt-2">
+                        Maturity Rating: {movie.maturity_rating}
+                      </p>
+                      <p className="text-sm text-gray-200 mt-2">
                         Runtime: {movie.runtime}
                       </p>
+
                       <div className="mt-2 flex justify-center gap-2">
                         <span className="bg-yellow-500 text-white px-2 py-1 rounded text-xs">
                           IMDb: {movie.scores.imdb}
